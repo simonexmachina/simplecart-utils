@@ -1,9 +1,9 @@
+(function($) {
 $.fn.simpleCartUtils = function( option ) {
 	var args = arguments;
 	return this.each(function() {
-    	var $this, data, options;
-			$this = $(this);
-			options = typeof option === 'object' && option;
+    	var $this = $(this),
+			options = typeof option === 'object' && option,
 			data = $this.data('simpleCartUtils') || new SimpleCartUtils(this, options);
 		if (typeof option === 'string') {
 			args = Array.prototype.slice.call(args);
@@ -21,6 +21,7 @@ $.fn.simpleCartUtils.defaults = {
 	 */
 	animation: true,
 	images: true,
+	imagesExclude: null,
 	info: '.cartInfo',
 	popover: '#cartPopover',
 	cartButton: '#cartButton',
@@ -97,6 +98,8 @@ SimpleCartUtils.prototype = {
 	},
 	images: function() {
 		this.find(".simpleCart_shelfItem img")
+			.not(this.options.imagesExclude)
 			.addClass('item_add item_image');
 	}
 }
+}(jQuery));
