@@ -26,6 +26,18 @@ $.fn.simpleCartUtils.defaults = {
 	popover: '#cartPopover',
 	cartButton: '#cartButton',
 };
+$.fn.simpleCartUtils.disablePrototype = function() {
+	window.PrototypeDisabled = window.Prototype;
+	window.$Disabled = window.$;
+	window.Prototype = null;
+	window.$ = window.jQuery;
+}
+$.fn.simpleCartUtils.reenablePrototype = function() {
+	simpleCart.ready(function() {
+		window.$ = window.$Disabled;
+		window.Prototype = window.PrototypeDisabled;
+	});
+}
 var SimpleCartUtils = function( el, options ) {
 	this.$el = $(el);
 	this.$el.data('simpleCartUtils', this);
